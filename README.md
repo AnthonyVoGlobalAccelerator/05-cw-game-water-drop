@@ -9,18 +9,32 @@ clean water for a community. It is built with HTML, CSS, and JavaScript.
   left/right arrow keys or A/D. On touch devices, use the on-screen arrows.
 - Collect blue water drops for **10 points and 1 oz**.
 - Every 20 collected water droplets advances the player to the next level.
+- Every 15 oz upgrades the community school and increases the points multiplier,
+  up to 3x for the journey.
 - You start with **5 lives**. Avoid rolled-up paper trash because each
   collision removes one life and five points.
+- Collect springs for a six-second jump that clears trash and earns five bonus
+  points for each cleared obstacle.
+- Collect watering cans for **10 water drops**.
+- Collect hearts for **one extra life**.
+- Toilet paper, empty cans, plastic bags, and plastic bottles are all trash
+  obstacles. They each remove one life and five points if they hit you.
 - Higher levels spawn more trash.
 - The timer counts upward for the entire journey. There is no time limit;
   continue collecting water until all five lives are lost.
 - Use **Pause** to freeze the timer and sewer traffic, then select **Resume**
   to continue.
+- On touch devices, use the on-screen arrows to switch lanes.
 - Confetti celebrates every 20 oz collected and every 100 seconds survived.
 - The end screen shows your final score, water total, and final elapsed time.
 - Select **Play again** to reset all counters and replay the level.
 - Use **Settings** to view the controls or **Home** to return to the start
   state.
+- Reaching the selected water goal opens a community question. Choose the
+  clean-water action to complete the journey and earn a bonus.
+- Journey pace options are **Low**, **Medium**, and **Hard**. Low uses only
+  toilet paper obstacles, Medium uses every trash type, and Hard starts with
+  one life and moves objects faster.
 
 ## Current project structure
 
@@ -219,24 +233,7 @@ The game is divided into functions such as:
 You need to understand function declarations, parameters, return values, and
 calling functions.
 
-#### Game state
-
-The game tracks its current mode with:
-
-```js
-let gameState = "ready";
-```
-
-The main states are:
-
-- `ready`
-- `playing`
-- `paused`
-- `result`
-- `community`
-- `answering`
-
-The game checks state before allowing actions:
+### Accessibility
 
 ```js
 if (gameState !== "playing") return;

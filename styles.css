@@ -45,7 +45,7 @@ h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); }
 
 .hud {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 10px;
     margin-bottom: 12px;
 }
@@ -84,6 +84,22 @@ h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); }
     outline: none;
     background: #455a64;
 }
+
+.community-illustration {
+    position: absolute;
+    z-index: 1;
+    inset: 12px 8% auto;
+    height: 112px;
+    opacity: .9;
+}
+.sun { position: absolute; top: 8px; right: 7%; width: 42px; height: 42px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 8px rgba(255,201,7,.18); }
+.school-building { position: absolute; bottom: 0; left: 20%; width: 112px; height: 68px; border: 5px solid #fff; background: var(--yellow); box-shadow: 0 5px 0 rgba(27,27,27,.2); }
+.school-roof { position: absolute; top: -25px; left: -12px; width: 126px; height: 30px; background: var(--blue); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.school-door { position: absolute; bottom: 0; left: 42px; width: 27px; height: 42px; background: var(--navy); }
+.school-building::before, .school-building::after { position: absolute; top: 16px; width: 20px; height: 18px; content: ""; background: #d7f7ff; border: 3px solid var(--navy); }
+.school-building::before { left: 12px; } .school-building::after { right: 12px; }
+.water-tank { position: absolute; right: 21%; bottom: 0; width: 48px; height: 55px; border-radius: 48% 48% 10% 10%; background: var(--light-blue); border: 5px solid #fff; }
+.water-tank::after { position: absolute; bottom: -16px; left: 17px; width: 6px; height: 17px; content: ""; background: #fff; }
 
 .path-decoration {
     position: absolute;
@@ -158,10 +174,16 @@ h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); }
     filter: drop-shadow(0 3px 1px rgba(22, 50, 79, .25));
     transition: left .12s ease-out;
 }
+.player.jumping { animation: jump 1s ease-in-out infinite; filter: drop-shadow(0 10px 2px rgba(22,50,79,.2)); }
+@keyframes jump { 50% { transform: translateX(-50%) translateY(-64px) scale(1.08); } }
 
 .game-object { font-size: 2.15rem; }
 .droplet { filter: drop-shadow(0 3px 4px rgba(46, 157, 247, .45)); }
 .obstacle { font-size: 2.15rem; filter: drop-shadow(0 3px 2px rgba(0,0,0,.45)); }
+.watering-can { width: 46px; height: 58px; background: url("img/water-can-transparent.png") center / contain no-repeat; filter: drop-shadow(0 3px 4px rgba(255,201,7,.65)); animation: powerup-pulse .8s ease-in-out infinite alternate; }
+.spring { font-size: 2.45rem; filter: drop-shadow(0 3px 4px rgba(79,203,83,.65)); animation: powerup-pulse .8s ease-in-out infinite alternate; }
+.heart { font-size: 2.35rem; filter: drop-shadow(0 3px 4px rgba(245,64,44,.65)); animation: powerup-pulse .8s ease-in-out infinite alternate; }
+@keyframes powerup-pulse { to { transform: translateX(-50%) scale(1.12) rotate(4deg); } }
 .collected { opacity: 0; transform: translateX(-50%) scale(1.8); transition: .15s; }
 
 .game-message {
@@ -184,6 +206,7 @@ h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); }
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 14px;
     padding: 10px;
     color: #52718d;
@@ -233,6 +256,26 @@ h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); }
     justify-content: center;
     gap: 10px;
 }
+.difficulty-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+    color: var(--muted-blue);
+    font-size: .9rem;
+    font-weight: 700;
+}
+.difficulty-controls select {
+    padding: 8px 28px 8px 10px;
+    border: 2px solid var(--blue);
+    border-radius: 8px;
+    color: var(--navy);
+    background: #fff;
+    font: inherit;
+}
+.difficulty-controls select:disabled { opacity: .65; }
+.difficulty-controls span { font-weight: 500; }
 .game-actions .primary-button,
 .game-actions .secondary-button {
     width: auto;
@@ -271,6 +314,34 @@ h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); }
 .final-stats strong { color: var(--navy); font-size: 1.5rem; }
 .result-actions { display: grid; gap: 9px; }
 .settings-note { color: var(--muted-blue); font-size: .9rem; }
+.sound-setting {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 18px 0 4px;
+    padding: 12px;
+    border: 2px solid rgba(22, 50, 79, .12);
+    border-radius: 9px;
+    color: var(--navy);
+    font-weight: 700;
+}
+.sound-setting input { width: 18px; height: 18px; accent-color: var(--blue); }
+.sound-setting input:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.sound-setting .settings-note { margin-left: auto; }
+.site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 18px;
+    margin: 26px 0 6px;
+    padding-top: 16px;
+    border-top: 2px solid rgba(22, 50, 79, .12);
+    color: var(--muted-blue);
+    font-size: .82rem;
+    text-align: center;
+}
+.site-footer a { color: #1574ba; font-weight: 700; }
+.site-footer a:hover { color: var(--navy); }
 
 @media (max-width: 600px) {
     body { padding: 18px 10px; }
@@ -283,4 +354,7 @@ h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); }
     .game-actions { flex-direction: column; align-items: stretch; }
     .game-actions .primary-button,
     .game-actions .secondary-button { width: 100%; }
+    .difficulty-controls { flex-wrap: wrap; }
+    .difficulty-controls span { flex-basis: 100%; text-align: center; }
+    .controls span { flex-basis: 100%; order: 2; text-align: center; }
 }
